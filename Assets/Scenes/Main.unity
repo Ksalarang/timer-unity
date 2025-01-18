@@ -211,6 +211,8 @@ MonoBehaviour:
   <TimerView>k__BackingField: {fileID: 228724227}
   <PlayButton>k__BackingField: {fileID: 1281351977}
   <StopButton>k__BackingField: {fileID: 2056072878}
+  PlayButtonSprite: {fileID: 21300000, guid: eec9d9be4702b7e45bbfb158f42950b8, type: 3}
+  PauseButtonSprite: {fileID: 21300000, guid: 16df67a4355a4e641a71fdb1c619cf9e, type: 3}
 --- !u!4 &470607323
 Transform:
   m_ObjectHideFlags: 0
@@ -418,6 +420,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StopButton
       objectReference: {fileID: 0}
+    - target: {fileID: 758012039557700497, guid: 3feee85b7cfaf974da83f1f3c590da34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2723823332261284694, guid: 3feee85b7cfaf974da83f1f3c590da34, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -588,6 +594,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1470673440}
     m_Modifications:
+    - target: {fileID: 687494358353284799, guid: 9b0807c375e1424408cbee442a4fc9f9, type: 3}
+      propertyPath: _type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1764526257481673178, guid: 9b0807c375e1424408cbee442a4fc9f9, type: 3}
       propertyPath: m_Name
       value: NumberInputMinutes
@@ -784,6 +794,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1470673440}
     m_Modifications:
+    - target: {fileID: 687494358353284799, guid: 9b0807c375e1424408cbee442a4fc9f9, type: 3}
+      propertyPath: _type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1764526257481673178, guid: 9b0807c375e1424408cbee442a4fc9f9, type: 3}
       propertyPath: m_Name
       value: NumberInputSeconds

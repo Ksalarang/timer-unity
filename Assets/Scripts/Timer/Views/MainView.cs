@@ -13,5 +13,16 @@ namespace Timer.Views
 
         [field: SerializeField]
         public Button StopButton { get; private set; }
+
+        [SerializeField]
+        private Sprite PlayButtonSprite;
+
+        [SerializeField]
+        private Sprite PauseButtonSprite;
+
+        public void SetPlayButtonState(bool playing)
+        {
+            PlayButton.image.sprite = playing ? PauseButtonSprite : PlayButtonSprite;
+        }
     }
 }
