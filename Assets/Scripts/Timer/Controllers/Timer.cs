@@ -14,6 +14,7 @@ namespace Timer.Controllers
 
         private TimerState _state = TimerState.Idle;
         private int _interval;
+        private int _pausedInterval;
         private CancellationTokenSource _tokenSource;
 
         public void Start(int intervalMillis)
@@ -25,6 +26,42 @@ namespace Timer.Controllers
 
             _state = TimerState.Running;
             _interval = intervalMillis;
+
+            if (_tokenSource != null)
+            {
+                _tokenSource.Cancel();
+                _tokenSource.Dispose();
+            }
+
+            _tokenSource = new CancellationTokenSource();
+            StartAsync(_tokenSource.Token).Forget();
+        }
+
+        public void Pause()
+        {
+            if (_state != TimerState.Running)
+            {
+                return;
+            }
+
+            _state = TimerState.Paused;
+
+            if (_tokenSource != null)
+            {
+                _tokenSource.Cancel();
+                _tokenSource.Dispose();
+                _tokenSource = null;
+            }
+        }
+
+        public void Resume()
+        {
+            if (_state != TimerState.Paused)
+            {
+                return;
+            }
+
+            _state = TimerState.Running;
 
             if (_tokenSource != null)
             {

@@ -40,15 +40,28 @@ namespace Timer.Controllers
 
         private void OnPlayClick()
         {
-            if (_timer.State == TimerState.Idle)
+            switch (_timer.State)
             {
-                var timerView = _view.TimerView;
-                _currentTimeSpan = new TimeSpan(timerView.HoursField.Value, timerView.MinutesField.Value,
-                    timerView.SecondsField.Value);
+                case TimerState.Idle:
+                    var timerView = _view.TimerView;
+                    _currentTimeSpan = new TimeSpan(timerView.HoursField.Value, timerView.MinutesField.Value,
+                        timerView.SecondsField.Value);
 
-                _timer.Start((int) _currentTimeSpan.TotalMilliseconds);
-                _view.SetPlayButtonState(true);
-                _view.ShowStopButtonAsync(_tokenSource.Token).Forget();
+                    _timer.Start((int) _currentTimeSpan.TotalMilliseconds);
+                    _view.SetPlayButtonState(true);
+                    _view.ShowStopButtonAsync(_tokenSource.Token).Forget();
+                    break;
+                case TimerState.Running:
+                    _timer.Pause();
+                    _view.SetPlayButtonState(false);
+                    break;
+                case TimerState.Paused:
+                    _timer.Resume();
+                    _view.SetPlayButtonState(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(_timer.State),
+                        $"Case {_timer.State} is not defined");
             }
         }
 
