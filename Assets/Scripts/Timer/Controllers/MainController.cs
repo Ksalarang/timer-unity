@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Timer.Views;
 using UnityEngine;
 
@@ -10,12 +12,14 @@ namespace Timer.Controllers
         private MainView _view;
 
         private readonly Timer _timer = new();
+        private readonly CancellationTokenSource _tokenSource = new();
 
         private TimeSpan _currentTimeSpan;
 
         private void Start()
         {
             _view.PlayButton.onClick.AddListener(OnPlayClick);
+            _view.StopButton.onClick.AddListener(OnStopClick);
 
             _timer.SecondElapsed += OnSecondElapsed;
             _timer.Elapsed += OnTimerElapsed;
@@ -24,10 +28,14 @@ namespace Timer.Controllers
         private void OnDestroy()
         {
             _view.PlayButton.onClick.RemoveListener(OnPlayClick);
+            _view.StopButton.onClick.RemoveListener(OnStopClick);
 
             _timer.SecondElapsed -= OnSecondElapsed;
             _timer.Elapsed -= OnTimerElapsed;
             _timer.Dispose();
+
+            _tokenSource.Cancel();
+            _tokenSource.Dispose();
         }
 
         private void OnPlayClick()
@@ -40,6 +48,7 @@ namespace Timer.Controllers
 
                 _timer.Start((int) _currentTimeSpan.TotalMilliseconds);
                 _view.SetPlayButtonState(true);
+                _view.ShowStopButtonAsync(_tokenSource.Token).Forget();
             }
         }
 
@@ -58,6 +67,11 @@ namespace Timer.Controllers
             _view.TimerView.HoursField.Value = _currentTimeSpan.Hours;
             _view.TimerView.MinutesField.Value = _currentTimeSpan.Minutes;
             _view.TimerView.SecondsField.Value = _currentTimeSpan.Seconds;
+        }
+
+        private void OnStopClick()
+        {
+            _view.HideStopButtonAsync(_tokenSource.Token).Forget();
         }
     }
 }

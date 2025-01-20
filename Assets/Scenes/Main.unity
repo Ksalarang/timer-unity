@@ -213,6 +213,9 @@ MonoBehaviour:
   <StopButton>k__BackingField: {fileID: 2056072878}
   PlayButtonSprite: {fileID: 21300000, guid: eec9d9be4702b7e45bbfb158f42950b8, type: 3}
   PauseButtonSprite: {fileID: 21300000, guid: 16df67a4355a4e641a71fdb1c619cf9e, type: 3}
+  _stopButtonStartPosition: {x: 0, y: -970, z: 0}
+  _stopButtonEndPosition: {x: 0, y: -670, z: 0}
+  _stopButtonDuration: 0.3
 --- !u!4 &470607323
 Transform:
   m_ObjectHideFlags: 0
@@ -324,8 +327,8 @@ RectTransform:
   m_Children:
   - {fileID: 789924079}
   - {fileID: 228724226}
-  - {fileID: 1281351976}
   - {fileID: 1068539723}
+  - {fileID: 1281351976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -490,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2723823332261284694, guid: 3feee85b7cfaf974da83f1f3c590da34, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2723823332261284694, guid: 3feee85b7cfaf974da83f1f3c590da34, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
