@@ -11,6 +11,9 @@ namespace Timer.Controllers
         [SerializeField]
         private MainView _view;
 
+        [SerializeField]
+        private AudioSource _audioSource;
+
         private readonly Timer _timer = new();
         private readonly CancellationTokenSource _tokenSource = new();
 
@@ -81,6 +84,12 @@ namespace Timer.Controllers
             _view.TimerView.HoursField.Value = _currentTimeSpan.Hours;
             _view.TimerView.MinutesField.Value = _currentTimeSpan.Minutes;
             _view.TimerView.SecondsField.Value = _currentTimeSpan.Seconds;
+
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+            _audioSource.Play();
         }
 
         private void OnStopClick()

@@ -43,7 +43,7 @@ namespace Timer.Views
             SetButtonsInteractable(false);
             StopButton.gameObject.SetActive(true);
             StopButton.image.SetAlpha(0f);
-            StopButton.image.DOFade(1f, _stopButtonDuration).WithCancellation(token);
+            StopButton.image.DOFade(1f, _stopButtonDuration).WithCancellation(token).Forget();
             await StopButton.transform.DOLocalMove(_stopButtonEndPosition, _stopButtonDuration).WithCancellation(token);
 
             SetButtonsInteractable(true);
@@ -53,7 +53,7 @@ namespace Timer.Views
         {
             SetButtonsInteractable(false);
             StopButton.image.SetAlpha(1f);
-            StopButton.image.DOFade(0f, _stopButtonDuration).WithCancellation(token);
+            StopButton.image.DOFade(0f, _stopButtonDuration).WithCancellation(token).Forget();
             await StopButton.transform.DOLocalMove(_stopButtonStartPosition, _stopButtonDuration)
                 .WithCancellation(token);
 
