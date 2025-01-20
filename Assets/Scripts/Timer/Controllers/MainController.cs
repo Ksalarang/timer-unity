@@ -64,6 +64,7 @@ namespace Timer.Controllers
         private void OnTimerElapsed()
         {
             _view.SetPlayButtonState(false);
+            _view.HideStopButtonAsync(_tokenSource.Token).Forget();
             _view.TimerView.HoursField.Value = _currentTimeSpan.Hours;
             _view.TimerView.MinutesField.Value = _currentTimeSpan.Minutes;
             _view.TimerView.SecondsField.Value = _currentTimeSpan.Seconds;
@@ -71,7 +72,8 @@ namespace Timer.Controllers
 
         private void OnStopClick()
         {
-            _view.HideStopButtonAsync(_tokenSource.Token).Forget();
+            _timer.Stop();
+            OnTimerElapsed();
         }
     }
 }

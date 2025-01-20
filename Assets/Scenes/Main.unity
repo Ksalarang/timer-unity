@@ -215,7 +215,7 @@ MonoBehaviour:
   PauseButtonSprite: {fileID: 21300000, guid: 16df67a4355a4e641a71fdb1c619cf9e, type: 3}
   _stopButtonStartPosition: {x: 0, y: -970, z: 0}
   _stopButtonEndPosition: {x: 0, y: -670, z: 0}
-  _stopButtonDuration: 0.3
+  _stopButtonDuration: 0.2
 --- !u!4 &470607323
 Transform:
   m_ObjectHideFlags: 0
@@ -684,6 +684,10 @@ PrefabInstance:
     - target: {fileID: 3451987036170438615, guid: 9b0807c375e1424408cbee442a4fc9f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193960997404226773, guid: 9b0807c375e1424408cbee442a4fc9f9, type: 3}
+      propertyPath: m_Text
+      value: 01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

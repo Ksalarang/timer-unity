@@ -40,20 +40,31 @@ namespace Timer.Views
 
         public async UniTask ShowStopButtonAsync(CancellationToken token)
         {
+            SetButtonsInteractable(false);
             StopButton.gameObject.SetActive(true);
             StopButton.image.SetAlpha(0f);
             StopButton.image.DOFade(1f, _stopButtonDuration).WithCancellation(token);
             await StopButton.transform.DOLocalMove(_stopButtonEndPosition, _stopButtonDuration).WithCancellation(token);
+
+            SetButtonsInteractable(true);
         }
 
         public async UniTask HideStopButtonAsync(CancellationToken token)
         {
+            SetButtonsInteractable(false);
             StopButton.image.SetAlpha(1f);
             StopButton.image.DOFade(0f, _stopButtonDuration).WithCancellation(token);
             await StopButton.transform.DOLocalMove(_stopButtonStartPosition, _stopButtonDuration)
                 .WithCancellation(token);
 
             StopButton.gameObject.SetActive(false);
+            SetButtonsInteractable(true);
+        }
+
+        private void SetButtonsInteractable(bool interactable)
+        {
+            PlayButton.interactable = interactable;
+            StopButton.interactable = interactable;
         }
     }
 }

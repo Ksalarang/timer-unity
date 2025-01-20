@@ -8,7 +8,6 @@ namespace Timer.Controllers
     {
         public event Action SecondElapsed;
         public event Action Elapsed;
-        public event Action Stopped;
 
         public TimerState State => _state;
         public int TimeLeftMillis => _interval;
@@ -37,13 +36,30 @@ namespace Timer.Controllers
             StartAsync(_tokenSource.Token).Forget();
         }
 
+        public void Stop()
+        {
+            if (_state == TimerState.Idle)
+            {
+                return;
+            }
+
+            _state = TimerState.Idle;
+            _interval = 0;
+
+            if (_tokenSource != null)
+            {
+                _tokenSource.Cancel();
+                _tokenSource.Dispose();
+                _tokenSource = null;
+            }
+        }
+
         public void Dispose()
         {
             if (_tokenSource != null)
             {
                 _tokenSource.Cancel();
                 _tokenSource.Dispose();
-                _tokenSource = null;
             }
         }
 
@@ -55,7 +71,6 @@ namespace Timer.Controllers
 
                 if (_state != TimerState.Running || token.IsCancellationRequested)
                 {
-                    OnStopped();
                     break;
                 }
 
@@ -74,13 +89,6 @@ namespace Timer.Controllers
                 _interval = 0;
                 Elapsed?.Invoke();
             }
-        }
-
-        private void OnStopped()
-        {
-            _state = TimerState.Idle;
-            _interval = 0;
-            Stopped?.Invoke();
         }
     }
 
