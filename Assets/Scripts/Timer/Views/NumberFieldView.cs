@@ -35,6 +35,11 @@ namespace Timer.Views
             _inputField.onValueChanged.RemoveListener(OnTextChanged);
         }
 
+        public void SetInteractable(bool interactable)
+        {
+            _inputField.interactable = interactable;
+        }
+
         private void OnTextChanged(string text)
         {
             if (text.Length == 0 || Regex.IsMatch(text, @"^0\d$"))

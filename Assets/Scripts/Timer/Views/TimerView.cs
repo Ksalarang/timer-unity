@@ -12,5 +12,12 @@ namespace Timer.Views
 
         [field: SerializeField]
         public NumberFieldView SecondsField { get; private set; }
+
+        public void SetInteractable(bool interactable)
+        {
+            HoursField.SetInteractable(interactable);
+            MinutesField.SetInteractable(interactable);
+            SecondsField.SetInteractable(interactable);
+        }
     }
 }

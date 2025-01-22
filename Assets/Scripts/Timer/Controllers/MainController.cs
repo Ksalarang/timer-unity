@@ -53,6 +53,7 @@ namespace Timer.Controllers
                     _timer.Start((int) _currentTimeSpan.TotalMilliseconds);
                     _view.SetPlayButtonState(true);
                     _view.ShowStopButtonAsync(_tokenSource.Token).Forget();
+                    _view.TimerView.SetInteractable(false);
                     break;
                 case TimerState.Running:
                     _timer.Pause();
@@ -101,6 +102,7 @@ namespace Timer.Controllers
             _view.TimerView.HoursField.Value = _currentTimeSpan.Hours;
             _view.TimerView.MinutesField.Value = _currentTimeSpan.Minutes;
             _view.TimerView.SecondsField.Value = _currentTimeSpan.Seconds;
+            _view.TimerView.SetInteractable(true);
         }
     }
 }
